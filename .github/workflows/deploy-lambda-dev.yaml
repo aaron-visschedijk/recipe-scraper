@@ -24,10 +24,10 @@ jobs:
           pip install -r src/requirements.txt -t src
           mkdir build
           cd src
-          zip -9 -r ../build/lambda-pkg-${{ github.sha }}.zip ./
+          zip -9 -r ../build/lambda.zip ./
           cd ..
           pip install awscli
-          aws s3 sync --delete ./build s3://recipe-scrapers-lambda/${{ github.event.repository.name }}/
+          aws s3 sync --delete ./build s3://recipe-scrapers-lambda/
   
   terraform:
     needs: build-lambda-package
@@ -49,13 +49,9 @@ jobs:
         id: plan
         run: |
           cd deploy
-          terraform plan \
-          -var 'build_tag=${{ github.sha }}' \
-          -var 'project_name=${{ github.event.repository.name }}'
+          terraform plan
       - name: Terraform Apply
         id: apply
         run: |
           cd deploy
-          terraform apply -auto-approve \
-          -var 'build_tag=${{ github.sha }}' \
-          -var 'project_name=${{ github.event.repository.name }}'
+          terraform apply -auto-approve

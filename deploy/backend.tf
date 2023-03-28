@@ -8,7 +8,7 @@ terraform {
 
   backend "s3" {
     bucket         = "rust-serverless-backend"
-    key            = "terraform.tfstate"
+    key            = "recipe-scraper/terraform.tfstate"
     region         = "ap-southeast-1"
     dynamodb_table = "terraform-statelock"
   }

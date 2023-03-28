@@ -1,5 +1,5 @@
 resource "aws_iam_role" "lambda_role" {
-  name = "lambda_role"
+  name = "python_lambda_role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -15,7 +15,7 @@ resource "aws_iam_role" "lambda_role" {
 }
 
 resource "aws_iam_policy" "lambda_policy" {
-  name = "lambda_policy"
+  name = "python_lambda_policy"
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
